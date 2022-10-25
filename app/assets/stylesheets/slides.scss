@@ -1,0 +1,132 @@
+#slides {
+    position: relative;
+    height: 600px;
+    padding: 0px;
+    margin: 0px;
+    list-style-type: none;
+}
+
+.slidee {
+    position: absolute;
+    margin-left: 20px;
+    top: 40px;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    z-index: 1;
+
+    -webkit-transition: opacity 1s;
+    -moz-transition: opacity 1s;
+    -o-transition: opacity 1s;
+    transition: opacity 1s;
+
+    box-sizing: border-box;
+    color: #fff;
+}
+
+.showing {
+    opacity: 1;
+    z-index: 2;
+}
+
+.image-carousel {
+    width: 500px;
+    height: 100%;
+    margin: 0 auto;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.info {
+    font-size: 18px;
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    width: 200px;
+    margin-left: -100px;
+}
+.info-perfil {
+    font-size: 18px;
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    width: 200px;
+    margin-left: -200px;
+}
+.nombre{
+    font-size: 24px;
+}
+
+#like_dislike{
+    margin-top: 50px;
+    margin-bottom: 400px;
+    width: 100%;
+    text-align: center;
+    span {
+        margin: 0 10px;
+    }
+}
+#Like{
+    cursor: pointer;
+    &:hover{
+        color: #59CD90 !important;
+    }
+}
+#Dislike{
+    cursor: pointer;
+    &:hover{
+        color: #EE6352 !important;
+    }
+}
+#arrows{
+    margin-top: 150px;
+    margin-bottom: 400px;
+    margin-left: 100px;
+    position: absolute;
+    z-index: 10;
+    span {
+        margin: 0 180px;
+    }
+}
+
+.match-icono{
+    width: 100px;
+    height: 120px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    cursor: pointer;
+
+    p{
+        position: absolute;
+        bottom: 35px;
+        left: 15px;
+        margin: 0;
+        font-weight: bold;
+    }
+}
+.match-icono:hover {
+width: 110px;
+height: 130px;
+text-decoration: none;
+letter-spacing: 1px;
+-webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+-moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+box-shadow: 5px 40px -10px rgba(0,0,0,0.57);
+transition: all 0.4s ease 0s;
+}
+.clikeable {
+    cursor: pointer;
+    p{
+        position: absolute;
+        left: 80px;
+        top: 10px;
+    }
+}
+.perfil-nombre{
+    padding-left: 350px;
+    padding-bottom: 0px;
+    padding-top: 50px;
+    color: black;
+}

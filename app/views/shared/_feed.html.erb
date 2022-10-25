@@ -1,0 +1,161 @@
+<!--Section: Newsfeed-->
+<% i = 5 + rand(9)%>
+
+  <div class="test">
+
+  <div class="card" style="max-width: 20rem">
+    <div class="card-body">
+      <div class="d-flex mb-3"
+        <div><h5> Filtrar Publicaciones </h5></div>
+        <%= form_tag(publications_path, method: :get) do %>
+          <p> Comuna: <%= select_tag(:search, options_for_select(["Cerrillos","Cerro Navia","Conchalí","El Bosque",
+          "Estación Central","Huechuraba","Independencia","La Cisterna","La Florida","La Granja","La Pintana","La Reina","Las Condes",
+          "Lo Barnechea","Lo Espejo","Lo Prado","Macul","Maipú","Pedro Aguirre Cerda","Peñalolén","Providencia","Pudahuel","Quilicura",
+          "Quinta Normal","Recoleta","Renca","San Joaquín","San Miguel","San Ramón","Santiago","Vitacura","Ñuñoa"]), :include_blank => true) %></p>
+        <%= submit_tag ("Buscar") %>
+      </div>
+    </div>
+  </div>
+
+<% @publications.each do |publication|%>
+
+  <section>
+<br>
+<br>
+  <div class="card" style="max-width: 42rem">
+    <div class="card-body">
+      <!-- Data -->
+      <div class="d-flex mb-3">
+        <a href= <%= user_path(publication.user_id)%> >
+        <% if publication.user.images.attached? %>
+          <%= image_tag publication.user.images.first, alt:"Avatar", class:"border rounded-circle me-2", style:"height: 40px" %>
+        <% else %>
+          <img src="https://i.ibb.co/b6zws6y/avatar.webp" class="border rounded-circle me-2" alt="Avatar" style="height: 40px" />
+        <% end %>
+        </a>
+        <div>
+          <a href= <%= publication_path(publication)%> class="text-dark mb-0">
+            <strong> <%= publication.titulo%> </strong>
+          </a>
+          <a href="" class="text-muted d-block" style="margin-top: -6px">
+            <small> <%= publication.user.username%> </small>
+          </a>
+        </div>
+      </div>
+      <!-- Description -->
+      <div>
+        <p>
+        Yo los llevo, mi mail es <%= publication.user.email %> <br>
+        Publicación creada el: <%= publication.created_at%> <br>
+        Fecha de salida: <%= publication.fecha %> <br>
+        Hora de salida: <%= publication.hora %> <br>
+        Punto de partida: <%= publication.punto_partida %>, <%= publication.comuna_partida %> <br>
+        Punto de llegada: <%= publication.punto_llegada %>, <%= publication.comuna_llegada %> <br>
+        Cupos: <%= publication.cupos%> <br>
+        Radio max para buscar pasajeros (km): <%= publication.radio%> <br>
+        </p>
+      </div>
+    </div>
+        
+
+        <% pic = "https://picsum.photos/seed/" %>
+        <% size = "/700/" %>
+        <% i += 1 + rand(30)%>
+        <% url = pic + i.to_s + size%>
+        <% puts url%>
+        <% puts url%>
+    <!-- Media -->
+        
+    <!-- Interactions -->
+    <div class="card-body">
+      <!-- Reactions -->
+      <div class="d-flex justify-content-between mb-3">
+        <div>
+          <a href="">
+            <i class="fas fa-thumbs-up text-primary"></i>
+            <i class="fas fa-heart text-danger"></i>
+          </a>
+        </div>
+        <div>
+          <a href= <%= publication_path(publication)%>   class="text-muted"> <%= publication.comments.count%> comentarios </a>
+        </div>
+      </div>
+      <!-- Reactions -->
+
+      <!-- Buttons -->
+      <div class="d-flex justify-content-between text-center mb-4">
+          <%= button_to "Ver Publicación", publication_path(publication), type: "button", class: "button button5",  method: :get%>
+        <% if current_user == publication.user  %>
+          <%= button_to "Editar", edit_publication_path(publication), type: "button", class: "button button5",  method: :get%>
+          <% end %>
+          <% if current_user == publication.user || current_user.admin == true %>
+          <%= button_to "Eliminar", publication, type: "button", class: "button button5", method: :delete, data: { confirm: "Deseas eliminar esta publicación?"} %>
+          <% end %>
+          <% if current_user != publication.user  %>
+            <%= button_to "Solicitar viaje", solicituds_path, type: "button", class: "button button5" ,params: { solicitud: {publication_id: publication.id}}, method: :post%>
+            <%= button_to "Dejar Reseña", new_resena_path(publication.user), type: "button", class: "button button5",  method: :get%>
+            <% end %>
+        
+        
+      </div>
+      <!-- Buttons -->
+
+      <!-- Comments -->
+
+      <!-- Answers -->
+      <% i = 0%>
+      <% publication.comments.each do |comment|%>
+      <% break if (i == 3)%>
+      <!-- Single answer -->
+        <div class="d-flex mb-3">
+            <a href="">
+            <% if comment.user.images.attached? %>
+              <%= image_tag comment.user.images.first, alt:"Avatar", class:"border rounded-circle me-2", style:"height: 40px" %>
+            <% else %>
+              <img src="https://i.ibb.co/b6zws6y/avatar.webp" class="border rounded-circle me-2" alt="Avatar" style="height: 40px" />
+            <% end %>
+            </a>
+            <div>
+            <div class="bg-light rounded-3 px-3 py-1">
+                <a href= <%= user_path(comment.user) %> class="text-dark mb-0">
+                <strong> <%= comment.user.email%> </strong>
+                </a>
+                <a class="text-muted d-block">
+                <small> <%= comment.content %> </small>
+                </a>
+            </div>
+            <% if current_user == comment.user %>
+              <strong><%= link_to 'Eliminar comentario', [comment.publication, comment], method: :delete, data: { confirm: "Deseas eliminar este comentario?"}, class: "text-muted small ms-3 me-2" %> </strong>
+              <strong> <%= link_to 'Editar comentario', edit_publication_comment_path(comment.publication, comment), class: "text-muted small me-2" %> </strong>
+            <% end %>
+            </div>
+        </div>
+        <% i += 1 %>
+      <% end %>
+            <div class="bg-light rounded-3 px-3 py-1">
+            </div>
+            <div class="bg-light rounded-3 px-3 py-1">
+            </div>
+            <div class="bg-light rounded-3 px-3 py-1">
+            </div>
+            <div class="bg-light rounded-3 px-3 py-1">
+                <strong> Ingrese a la publicación para comentar o ver más comentarios </strong>
+            </div>
+      
+      
+
+      
+      <!-- Single answer -->
+
+      <!-- Answers -->
+
+      <!-- Comments -->
+    </div>
+    <!-- Interactions -->
+  </div>
+</section>
+<!--Section: Newsfeed-->
+
+<% end %>
+
+<% end %>

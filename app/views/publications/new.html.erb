@@ -1,0 +1,48 @@
+<h1 style="text-align:center">Nueva Publicación</h1>
+<p style="text-align:center"> Todos los campos son obligatorios</p>
+<ul class="nav justify-content-center">
+<%= form_for @publication do |f| %>
+  <div>
+    <%= f.label :'Título (min 5 caracteres)' %>
+    <%= f.text_field :titulo %>
+  </div>
+  <div>
+    <%= f.label :punto_partida %>
+    <%= f.text_field :punto_partida %> <%= f.select(:comuna_partida, options_for_select(["Cerrillos","Cerro Navia","Conchalí","El Bosque",
+    "Estación Central","Huechuraba","Independencia","La Cisterna","La Florida","La Granja","La Pintana","La Reina","Las Condes",
+    "Lo Barnechea","Lo Espejo","Lo Prado","Macul","Maipú","Pedro Aguirre Cerda","Peñalolén","Providencia","Pudahuel","Quilicura",
+    "Quinta Normal","Recoleta","Renca","San Joaquín","San Miguel","San Ramón","Santiago","Vitacura","Ñuñoa"], 
+    :selected => params[:comuna_partida]), { :include_blank => true }, { :class => 'span3 controls controls-row' })%>
+  </div>
+  <div>
+    <%= f.label :punto_llegada %>
+    <%= f.text_field :punto_llegada %> <%= f.select(:comuna_llegada, options_for_select(["Cerrillos","Cerro Navia","Conchalí","El Bosque",
+    "Estación Central","Huechuraba","Independencia","La Cisterna","La Florida","La Granja","La Pintana","La Reina","Las Condes",
+    "Lo Barnechea","Lo Espejo","Lo Prado","Macul","Maipú","Pedro Aguirre Cerda","Peñalolén","Providencia","Pudahuel","Quilicura",
+    "Quinta Normal","Recoleta","Renca","San Joaquín","San Miguel","San Ramón","Santiago","Vitacura","Ñuñoa"], 
+    :selected => params[:comuna_llegada]), { :include_blank => true }, { :class => 'span3 controls controls-row' })%>
+  </div>
+  <div>
+    <%= f.label :fecha %>
+    <%= f.date_field :fecha, min: Date.today %>
+  </div>
+  <div>
+    <%= f.label :hora %>
+    <%= f.time_field :hora, :class => "timepicker"%>
+  </div>
+  <div>
+    <%= f.label :cupos %>
+    <%= f.number_field :cupos, min:"1" %>
+  </div>
+  <div>
+    <%= f.label :'Radio max para buscar pasajeros (km)'%>
+    <%= f.number_field :radio, min:"1", step:0.5 %>
+  </div>
+  </div>
+  <div>
+  <center><%= f.button :Submit, :class => 'button button5'  %></center>
+  </div>
+  </div>
+<% end %>
+</ul>
+

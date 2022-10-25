@@ -1,0 +1,57 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark p-3">
+<div class="container-fluid">
+  <%= link_to "VIAJES UCÉ", root_path, class: "navbar-brand" %>
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class=" collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav ms-auto ">
+      <li class="nav-item">
+        <a class="nav-link mx-2 active", <%= link_to "Home", root_path, class: "btn_a" %> </a>
+      </li>
+      <% if current_user%>
+        <li class="nav-item">
+          <a class="nav-link font-italic mb-1", <%= link_to "Publicaciones", publications_path, class: "btn_a" %>   </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link font-italic mb-1", <%= link_to "Crear Publicación", publications_new_path, method: :get %> </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link font-italic mb-1", <%= link_to "Perfiles", users_path, method: :get %> </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link font-italic mb-1", <%= link_to "Mi Perfil", user_path(current_user) if current_user%> </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link font-italic mb-1", <%= link_to "Mis solicitudes", solicituds_path, class: "btn_a" %> </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link font-italic mb-1", <%= link_to "Mis chats", rooms_path, class: "btn_a" %> </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link font-italic mb-1", <%= link_to "Cerrar sesión", destroy_user_session_path, method: :delete %> </a>
+        </li>
+      <% else %>
+        <li class="nav-item">
+          <a class="nav-link font-italic mb-1", <%= link_to "Iniciar sesión", new_user_session_path, method: :get %> </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link font-italic mb-1", <%= link_to "Registrarse", new_user_registration_path, method: :get %> </a>
+        </li>
+      
+      
+      <% end %>
+      <li class="nav-item dropdown">
+        <a class="nav-link mx-2 dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Viajes Ucé
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <li><a class="dropdown-item" <%= link_to "Ayuda", static_pages_help_path, method: :get %></li>
+          <li><a class="dropdown-item" <%= link_to "Nosotros", static_pages_about_path, method: :get %></li>
+          <li><a class="dropdown-item" <%= link_to "Contacto", static_pages_contact_path, method: :get %></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</nav>

@@ -1,0 +1,32 @@
+<div class="card" style="max-width: 42rem">
+    <div class="card-body">
+      <!-- Data -->
+      <div class="d-flex mb-3">
+        <a href= <%= user_path(publication.user_id)%> >
+        <% if publication.user.images.attached? %>
+            <%= image_tag publication.user.images.first, alt:"Avatar", class:"border rounded-circle me-2", style:"height: 40px" %>
+                <% end %>
+        </a>
+        <div>
+          <a href= <%= publication_path(publication)%> class="text-dark mb-0">
+            <strong> <%= publication.titulo%> </strong>
+          </a>
+          <a href="" class="text-muted d-block" style="margin-top: -6px">
+            <small> <%= publication.user.username%> </small>
+          </a>
+        </div>
+      </div>
+      <!-- Description -->
+      <div>
+        <p>
+        Publicación creada el: <%= publication.created_at%> <br>
+        Fecha de salida: <%= publication.fecha %> <br>
+        Punto de partida: <%= publication.punto_partida %> <br>
+        Punto de llegada: <%= publication.punto_llegada %> <br>
+        Cupos: <%= publication.cupos%> <br>
+        Radio max para buscar pasajeros (km): <%= publication.radio%> <br>
+        </p>
+      </div>
+    </div>
+    
+   

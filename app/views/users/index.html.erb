@@ -1,0 +1,43 @@
+<% if current_user%>
+<table class="table align-middle mb-0 bg-white">
+  <thead class="bg-light">
+    <tr>
+      <th>Nombre</th>
+      <th>Mail</th>
+      <th>Edad</th>
+      <th>Carrera</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @users.each_with_index do |user, index| %>
+    <tr>
+      <td>
+        <div class="d-flex align-items-center">
+          <% if user.images.attached? %>
+            <%= image_tag user.images.first, alt:"", class:"rounded-circle", style:"width: 45px; height: 45px" %>
+          <% else %>
+            <%= image_tag "https://i.ibb.co/b6zws6y/avatar.webp", alt:"", class:"rounded-circle", style:"width: 45px; height: 45px" %>
+          <% end %>
+          <div class="ms-3">
+            <p class="font-italic mb-1"><%= link_to user.name, user_path(user), class: "font-italic mb-1 " %> </p>
+            <p class="text-muted mb-0"> <%=user.username%> </p>
+          </div>
+        </div>
+      </td>
+      <td>
+        <p class="text-muted mb-0"> <%=user.email%> </p>
+      </td>
+      <td>
+        <p class="text-muted mb-0"> <%=user.age%> </p>
+      </td>
+      <td>
+        <p class="text-muted mb-0"> <%=user.work%> </p>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<% else %>
+  <%=  render file: "#{Rails.root}/public/404.html", layout: false, status: 404 %>
+<% end %>
+

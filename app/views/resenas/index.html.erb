@@ -1,0 +1,77 @@
+<br>
+<h5 class="bg-light"> El usuario <%= @user.username%> tiene <%= pluralize(@user.resenas.count, "reseña")%></h5>
+
+<table class="table align-middle mb-0 bg-white">
+  <thead class="bg-light">
+    <tr>
+      <th>Calificación</th>
+      <th>Puntualidad</th>
+      <th>Seguridad</th>
+      <th>Comentario</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @user.resenas.each_with_index do |resena, index| %>
+    <td>
+        <% if resena.calif == 5 %>
+          <span class="fa fa-star checked"></span>
+          <span class="fa fa-star checked"></span>
+          <span class="fa fa-star checked"></span>
+          <span class="fa fa-star checked"></span>
+          <span class="fa fa-star checked"></span>
+        <% end %>
+        <% if resena.calif == 4 %>
+          <span class="fa fa-star checked"></span>
+          <span class="fa fa-star checked"></span>
+          <span class="fa fa-star checked"></span>
+          <span class="fa fa-star checked"></span>
+          <span class="fa fa-star"></span>
+        <% end %>
+        <% if resena.calif == 3 %>
+          <span class="fa fa-star checked"></span>
+          <span class="fa fa-star checked"></span>
+          <span class="fa fa-star checked"></span>
+          <span class="fa fa-star"></span>
+          <span class="fa fa-star"></span>
+        <% end %>
+        <% if resena.calif == 2 %>
+          <span class="fa fa-star checked"></span>
+          <span class="fa fa-star checked"></span>
+          <span class="fa fa-star"></span>
+          <span class="fa fa-star"></span>
+          <span class="fa fa-star"></span>
+        <% end %>
+        <% if resena.calif == 1 %>
+          <span class="fa fa-star checked"></span>
+          <span class="fa fa-star"></span>
+          <span class="fa fa-star"></span>
+          <span class="fa fa-star"></span>
+          <span class="fa fa-star"></span>
+        <% end %>
+      </td>
+      <td>
+        <p class="text-muted mb-0"> <%=resena.puntualidad%> </p>
+      </td>
+      <td>
+        <p class="text-muted mb-0"> <%=resena.seguridad%> </p>
+      </td>
+      <td>
+        <p class="text-muted mb-0"> <%=resena.comentario%> </p>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Font Awesome Icon Library -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+.checked {
+  color: orange;
+}
+</style>
+</head>
+

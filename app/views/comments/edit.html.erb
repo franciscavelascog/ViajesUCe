@@ -1,0 +1,4 @@
+<%= form_for([@publication, @comment]) do |f|%>
+  <%= f.text_area :content %>
+  <center><%= f.button :Submit, :class => 'button button5'  %></center>
+<% end %>

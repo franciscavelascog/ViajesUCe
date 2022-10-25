@@ -1,0 +1,30 @@
+<h2> Esta publicación tiene <%= pluralize(@comments.count, "comentario")%></h2>
+
+  <% @comments.each do |comment|%>
+  <!-- Single answer -->
+    <div class="d-flex mb-3">
+        <a href="">
+          <% if comment.user.images.attached?%>
+            <%= image_tag comment.user.images.first, alt:"Generic placeholder image", class:"border rounded-circle me-2", style:"height: 40px", alt: "Avatar" %>
+          <% else %>
+              <img src="https://i.ibb.co/b6zws6y/avatar.webp" class="border rounded-circle me-2" alt="Avatar" style="height: 40px" />
+          <% end %>
+        </a>
+        <div>
+        <div class="bg-light rounded-3 px-3 py-1">
+            <a href= <%= user_path(comment.user_id) %> class="text-dark mb-0">
+            <strong> <%= comment.user.email%> </strong>
+            </a>
+            <a class="text-muted d-block">
+            <small> <%= comment.content %> </small>
+            </a>
+        </div>
+        <% if current_user == comment.user %>
+          <strong><%= link_to 'Eliminar comentario', [comment.publication, comment], method: :delete, data: { confirm: "Deseas eliminar este comentario?"}, class: "text-muted small ms-3 me-2" %> </strong>
+          <strong> <%= link_to 'Editar comentario', edit_publication_comment_path(comment.publication, comment) , class: "text-muted small me-2" %> </strong>
+        <% end %>
+        </div>
+    </div>
+  <% end %>
+
+<%= render 'comments/form' %>

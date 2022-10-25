@@ -1,0 +1,84 @@
+<section class="section"> 
+  <div class="d-flex justify-content-center">
+    <div class="d-inline-flex p-2">
+      <div class="d-flex flex-column">
+        <section>
+          <br>
+          <br>
+          <div class="card" style="max-width: 42rem">
+            <div class="card-body">
+              <!-- Data -->
+              <div class="d-flex mb-3">
+                <a href= <%= user_path(@publication.user_id)%> >
+
+                  <% if @publication.user.images.attached?%>
+                    <%= image_tag @publication.user.images.first, alt:"Generic placeholder image", class:"border rounded-circle me-2", style:"height: 40px", alt: "Avatar" %>
+                  <% else %>
+                      <img src="https://i.ibb.co/b6zws6y/avatar.webp" class="border rounded-circle me-2" alt="Avatar" style="height: 40px" />
+                  <% end %>
+                </a>
+                <div>
+                  <a href= <%= publication_path(@publication)%> class="text-dark mb-0">
+                    <strong> <%= @publication.titulo%> </strong>
+                  </a>
+                  <a href="" class="text-muted d-block" style="margin-top: -6px">
+                    <small> Publicación creada el <%= @publication.created_at%> </small>
+                  </a>
+                </div>
+              </div>
+              <!-- Description -->
+              <div>
+                <p>
+                Yo los llevo, mi mail es <%= @publication.user.email %> <br>
+                Id de la Publicacción: <%= @publication.id%> <br>
+                Publicacción creada por: <%= @publication.user.email%> <br>
+                Fecha de salida: <%= @publication.fecha %> <br>
+                Punto de partida: <%= @publication.punto_partida %> <br>
+                Punto de llegada: <%= @publication.punto_llegada %> <br>
+                Cupos: <%= @publication.cupos%> <br>
+                Radio max para buscar pasajeros (km): <%= @publication.radio%> <br>
+                </p>
+              </div>
+            </div>
+            
+            <!-- Media -->
+            <!-- Interactions -->
+            <div class="card-body">
+              <!-- Reactions -->
+              <div class="d-flex justify-content-between mb-3">
+                <div>
+                  <a href="">
+                    <i class="fas fa-thumbs-up text-primary"></i>
+                    <i class="fas fa-heart text-danger"></i>
+                    
+                  </a>
+                </div>
+                <div>
+                  <a href="" class="text-muted"> <%= @publication.comments.count%> comentarios </a>
+                </div>
+              </div>
+
+              <!-- Buttons -->
+              <div class="d-flex justify-content-between text-center  mb-4">
+                <% if current_user == @publication.user %>
+                  <%= button_to "Editar", edit_publication_path(@publication), type: "button", class: "button button5",  method: :get%>
+                  <%= button_to "Eliminar", @publication, type: "button", class: "button button5", method: :delete, data: { confirm: "Deseas eliminar esta publicación?"} %>
+          
+                <% else %>
+                  <%= button_to "Dejar Reseña", new_resena_path(@publication.user), type: "button", class: "button button5", method: :get%>
+                  <%= button_to "Solicitar viaje", solicituds_path, type: "button", class: "button button5" ,params: { solicitud: {publication_id: @publication.id}}, method: :post%>
+                <% end %>
+                
+              </div>
+
+              <!-- Comentarios -->
+              <%= render 'comments/comment'%>
+            </div>
+          </div> 
+        </section>
+      </div> 
+    </div>
+  </div>
+</section>
+
+

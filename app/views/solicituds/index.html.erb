@@ -1,0 +1,27 @@
+<h1>Mis solicitudes</h1>
+<% @solicituds.each do |solicitud|%>
+	<% @users.each do |user|%>
+		<% @publications.each do |publication|%>
+			<% if user.id == solicitud.user_id %>
+				<% if solicitud.publication_id == publication.id %>
+					<% if solicitud.status == "pending"%>
+							<a > <%= user.username %> solicito viajar contigo en la publicación <%= publication.titulo%> </a> <br>
+							<%= button_to "Aceptar", approve_solicitud_path(solicitud), type: "button", class: "button button5", method: :patch%>
+							<%= button_to "Rechazar", reject_solicitud_path(solicitud), type: "button", class: "button button5", method: :delete, data: { confirm: "Deseas rechazar esta solicitud?"}%>
+					<% else %>
+						<a> <%= user.username %> solicito viajar contigo en la publicación <%= publication.titulo%> </a> <br>
+						<button type="button" class="btn btn-dark" data-mdb-ripple-color="dark"> Ya se acepto esta solicitud </button> <br>
+
+					
+					<% end %>
+					
+				<% end %>
+			
+			<% end %>
+		
+		<% end %>
+		
+	<% end %>
+		
+
+<% end %>

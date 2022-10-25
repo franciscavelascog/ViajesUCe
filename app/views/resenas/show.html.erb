@@ -1,0 +1,24 @@
+<h2> Este usuario tiene <%= pluralize(@resenas.count, "Reseñas")%></h2>
+
+<h1> Reseñas </h1>
+
+<table align='center'>
+  <tr>
+    <thead>
+      <th>Puntualidad</th>
+      <th>Seguridad</th>
+      <th>Comentario</th>
+    </thead>
+  </tr>
+    <% @user.resenas.each do |resena| %>
+  <tr>
+    <td><%= resena.puntualidad %></td>
+    <td><%= resena.seguridad %></td>
+    <td><%= resena.comentario %></td>
+  </tr>
+  <% end %>
+</table>
+<br>
+
+
+<%= render 'resena/form' %>

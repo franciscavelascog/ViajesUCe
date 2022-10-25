@@ -1,0 +1,16 @@
+<%= form_for([@publication, @publication.comments.build]) do |f|%>
+      <div class="d-flex mb-3">
+        <a href="">
+          <% if current_user.images.attached?%>
+            <%= image_tag current_user.images.first, alt:"Generic placeholder image", class:"border rounded-circle me-2", style:"height: 40px", alt: "Avatar" %>
+          <% else %>
+              <img src="https://i.ibb.co/b6zws6y/avatar.webp" class="border rounded-circle me-2" alt="Avatar" style="height: 40px" />
+          <% end %>
+        </a>
+        <div class="form-outline w-100">
+          <%= f.text_area :content, class: "form-control", rows: "2" %>
+          <center><%= f.button :Comentar, :class => 'button button5'  %></center>
+        </div>
+      </div>
+<% end %>
+

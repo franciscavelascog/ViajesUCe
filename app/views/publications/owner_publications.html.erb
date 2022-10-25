@@ -1,0 +1,5 @@
+<h2> Publicaciones de <%= @user.username%>  </h2>
+
+<% @user.publications.each do |publication|%>
+    <a class="white-nav font-italic mb-1"> <%= link_to publication.titulo, publication_path(publication) %> </a>
+<% end %>

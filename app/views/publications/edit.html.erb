@@ -1,0 +1,38 @@
+<h1 style="text-align:center">Editar Publicación</h1>
+<p style="text-align:center"> Todos los campos son obligatorios</p>
+<ul class="nav justify-content-center">
+<p id = "notice"><%= notice %></p>
+<br>
+<%= form_for @publication do |f| %>
+  <div>
+    <%= f.label :'Título (min 5 caracteres)' %>
+    <%= f.text_field :titulo %>
+  </div>
+  <div>
+    <%= f.label :punto_partida %>
+    <%= f.text_field :punto_partida %>
+  </div>
+  <div>
+    <%= f.label :punto_llegada %>
+    <%= f.text_field :punto_llegada %>
+  </div>
+  <div>
+    <%= f.label :fecha %>
+    <%= f.datetime_field :fecha, min: Date.today  %>
+  </div>
+  <div>
+    <%= f.label :cupos %>
+    <%= f.number_field :cupos, min:"1" %>
+  </div>
+  <div>
+    <%= f.label :'Radio max para buscar pasajeros (km)' %>
+    <%= f.number_field :radio, min:"1", step:0.5 %>
+  </div>
+  <div>
+  <center><%= f.button :Submit, :class => 'button button5'  %></center>
+  </div>
+  </div>
+
+  <% end %>
+  </ul>
+
